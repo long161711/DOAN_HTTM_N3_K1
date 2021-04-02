@@ -1,0 +1,78 @@
+{% extends 'LOGIN/base.html' %}
+    {% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <style>
+         thead, tbody {
+            display: block;
+            }
+        tbody {
+          overflow-y: scroll;
+          height: 700px;
+        }
+        td, th {
+            min-width: 100px;
+            height: 25px;
+            border: solid 1px rgba(141, 159, 189, 0.34);
+        }
+        td:nth-child(6),th:nth-child(6){
+            min-width: 230px;
+        }
+        td:nth-child(5),th:nth-child(5){
+            min-width: 150px;
+        }
+        td:nth-child(3),th:nth-child(3){
+            min-width: 100px;
+        }
+        td:nth-child(2),th:nth-child(2){
+            min-width: 100px;
+        }
+        td:nth-child(1),th:nth-child(1){
+            min-width: 200px;
+        }
+    </style>
+<body>
+<form>
+    <div>
+    .
+    </div>
+    <div class="ten" style="margin-top:10px" >
+            <h5 style="text-align: center;ont-size :5px;">Bảng thể hiện kết quả đo đạc và dự đoán</h5>
+    </div>
+<table class="table" style="border-collapse: collapse;overflow-x: scroll;width:80%;border: 2px solid #58257b;margin: 0px auto; margin-top:10px" >
+
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Thời gian</th>
+      <th scope="col">Nhiệt Độ</th>
+      <th scope="col">Độ ẩm</th>
+      <th scope="col">Số người</th>
+      <th scope="col">Khoảng Thời Gian</th>
+      <th scope="col">Lượng nước(Đo đạc)</th>
+      <th scope="col">Lượng nước(Học máy)</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in cf %}
+
+    <tr>
+      <td scope="row">{{ item.thoigian }}</td>
+      <td>{{ item.nhietdo }}</td>
+      <td>{{ item.doam }}</td>
+      <td>{{ item.songuoi }}</td>
+      <td>{{ item.khoangtg }}</td>
+      <td>{{ item.luongnuoc }}</td>
+      <td>{{ item.luongnuocdudoan }}</td>
+  {% endfor %}
+
+  </tbody>
+</table>
+ <div style="margin-top:10px" >
+     .
+ </div>
+</form>
+
+
+</body>
+    {% endblock %}

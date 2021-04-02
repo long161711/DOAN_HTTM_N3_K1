@@ -1,0 +1,36 @@
+{% extends 'LOGIN/thingspeak.html' %}
+    {% block thingspeak %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+<body>
+<form>
+  <div class="ten" >
+            <h5 style="margin-top:40px;text-align: center;ont-size :5px;">Bảng thể hiện lượng nước sử dụng và lượng nước dự đoán trên ngày</h5>
+  </div>
+<table class="table" style="width:80%;border: 2px solid #58257b;margin: 0px auto;margin-top:40px" >
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Thời gian</th>
+      <th scope="col">Lượng nước(Đo đạc)</th>
+      <th scope="col">Lượng nước(Học máy)</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in data %}
+
+    <tr>
+      <th scope="row">{{ item.thoigian }}</th>
+      <td>{{ item.luongnuocdodac }}</td>
+      <td>{{ item.luongnuocdudoan }}</td>
+  {% endfor %}
+
+  </tbody>
+</table>
+  <div style="margin-top:30px">
+  .
+  </div>
+</form>
+
+</body>
+    {% endblock %}

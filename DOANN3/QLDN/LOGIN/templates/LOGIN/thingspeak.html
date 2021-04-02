@@ -1,0 +1,86 @@
+{% extends 'LOGIN/base.html' %}
+    {% block content %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+<script>
+    var endpoint = "/api/chart/thingspeak1/"
+    var trucx = [];
+    var trucy = [];
+    $.ajax({
+        method: "GET",
+        url: endpoint,
+        success: function(data){
+                trucx = data.trucx
+                trucy = data.trucy
+                trucy1 = data.trucy1
+                setChart();
+        },
+        error: function(error_data){
+            console.log("error")
+            console.log(error_data)
+        }
+    })
+   function  setChart(){
+     var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx1 = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: trucx,
+        datasets: [{
+        label: 'Lượng nước đo đạc',
+        data: trucy,
+        backgroundColor: [
+                'rgba(28, 28, 28, 0.2)',
+            ],
+            borderColor: [
+                 'rgba(0, 0, 0, 1)',
+            ],
+        borderWidth: 1
+
+    }, {
+         label: 'Lượng nước dự đoán',
+        data: trucy1,
+        backgroundColor: [
+                'rgba(205, 0, 0, 0.2)',
+            ],
+            borderColor: [
+                'rgba(205, 0, 0, 1)',
+            ],
+        borderWidth: 1
+
+    }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+   }
+</script>
+
+<div class="bieudo" >
+        <div>
+         .
+        </div>
+        <div class="ten" >
+            <h5 style="margin-top:10px;text-align: center;ont-size :5px;">Biểu đồ thể hiện lượng nước đo đạc và lượng nước học máy</h5>
+        </div>
+        <div class="col-sm-10" style="margin:0px auto;margin-top:10px;margin-left:60px">
+        <canvas id="myChart" width="50%" height="30%" ></canvas>
+        </div>
+        <div>
+            {% block thingspeak %}
+
+            {% endblock %}
+        </div>
+</div>
+
+    {% endblock %}

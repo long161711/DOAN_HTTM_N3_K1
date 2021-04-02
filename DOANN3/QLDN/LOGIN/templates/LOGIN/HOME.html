@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends 'LOGIN/base.html' %}
+    {% block content %}
+<html>
+<body>
+<form action="{% url 'usermember:file' %}" method="post">
+    {% csrf_token %}
+<input type="text" name="tenfile" value="" >
+<input type="submit" name="submit">
+</form>
+
+<div class="col-sm">
+        {% block conten %}
+
+        {% endblock %}
+    </div>
+</body>
+</html>
+    {% endblock %}
+<!--{% for item in cf %}-->
+<!--    {{ item.email }}-->
+<!--    {{ item.password }}-->
+<!--    <br>-->
+<!--{% endfor %}-->

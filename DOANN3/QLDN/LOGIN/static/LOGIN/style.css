@@ -1,0 +1,20 @@
+#ad {
+     font-family: Arial;
+    font-size: 13px;
+    width: 1200px;
+    margin:0px auto;
+}
+#mid {
+    width: 1200px;
+    background:#ccc;
+    min-height: 850px;
+    clear: ngu;
+}
+#footer {
+    background: #000;
+    width: 1200px;
+    text-align: center;
+    height: 40px;
+    color: #FFF;
+    clear: mid;
+}

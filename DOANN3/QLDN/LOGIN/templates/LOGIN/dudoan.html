@@ -1,0 +1,52 @@
+{% extends 'LOGIN/base.html' %}
+    {% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+.f1 {
+ text-align: center;
+ min-height: 100%;
+ width: 80%;
+ margin: 0px auto;
+}
+input[type=text] {
+  width: 80%;
+  padding: 10px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #58257b;
+  border-radius: 4px;
+}
+input[type=submit] {
+  background-color: #58257b;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+   <form class="f1" action="{% url 'usermember:dudoan' %}" method="post">
+    {% csrf_token %}
+       <label>Nhiệt độ:</label><br>
+       <input type="text" name="nhietdo" value="" ><br>
+       <label>Dộ ẩm:</label><br>
+       <input type="text" name="doam" value="" ><br>
+       <label>Số Người:</label><br>
+       <input type="text" name="songuoi" value="" ><br>
+       <input type="submit" name="submit" value="Dự đoán">
+
+   </form>
+    <div>
+        {% block dudoan %}
+
+        {% endblock %}
+    </div>
+</body>
+</html>
+    {% endblock %}

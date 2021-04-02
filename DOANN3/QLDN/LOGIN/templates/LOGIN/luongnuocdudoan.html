@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends 'LOGIN/dudoan.html' %}
+    {% block dudoan %}
+<html>
+<body >
+    <form style="border-width: 3px;
+   border-style: solid;min-height: 100%;
+ width: 80%;margin: 0px auto;">
+        <h5 style="margin-left: 10px;">KẾT QUẢ</h5>
+                  <ul style="font-size :20px;font-weight: normal;">
+                      <li>Với Nhiệt độ {{ alo1 }}C, dộ ẩm {{ alo2 }} và số người là {{ alo3 }} thì ta có:</li>
+                        <li>Lượng nước sử dụng trong giờ cao điểm : {{ luongnuocda }}</li>
+                          <li>Lượng nước sử dụng tối thiểu trên giờ : {{ luongnuocthieu }}</li>
+                          <li>Lượng nước sử dụng trong ngày : {{ luongnuocngay }}</li>
+                </ul>
+    </form>
+</body>
+</html>
+    {% endblock %}

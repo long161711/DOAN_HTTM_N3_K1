@@ -1,0 +1,160 @@
+{% extends 'LOGIN/base.html' %}
+    {% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+         thead, tbody {
+            display: block;
+            }
+        tbody {
+          overflow-y: scroll;
+          height: 700px;
+        }
+        td, th {
+            min-width: 150px;
+            height: 25px;
+            border: solid 1px rgba(141, 159, 189, 0.34);
+        }
+        td:nth-child(6),th:nth-child(6){
+            min-width: 230px;
+        }
+        td:nth-child(5),th:nth-child(5){
+            min-width: 150px;
+        }
+        td:nth-child(3),th:nth-child(3){
+            min-width: 150px;
+        }
+        td:nth-child(2),th:nth-child(2){
+            min-width: 150px;
+        }
+        td:nth-child(1),th:nth-child(1){
+            min-width: 250px;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+<script>
+    var endpoint = "/API/dataAPI/"
+    var trucx = [];
+    var trucy = [];
+    $.ajax({
+        method: "GET",
+        url: endpoint,
+        success: function(data){
+                trucx = data.trucx
+                trucy = data.trucy
+                setChart();
+        },
+        error: function(error_data){
+            console.log("error")
+            console.log(error_data)
+        }
+    })
+   function  setChart(){
+     var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: trucx,
+        datasets: [{
+        label: 'Lượng nước dự đoán',
+        data: trucy,
+        backgroundColor: [
+                'rgba(205, 0, 0, 0.2)',
+            ],
+            borderColor: [
+                'rgba(0, 0, 0, 1)',
+            ],
+        borderWidth: 1
+
+
+    }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+   }
+</script>
+
+<div class="bieudo">
+        <div>
+            .
+        </div>
+        <div class="ten" >
+            <h5 style="margin-top:10px;text-align: center;ont-size :5px;">Biểu đồ thể hiện lượng nước sử dụng trên giờ trong 5 ngày tới</h5>
+        </div>
+        <div class="col-sm-10"style="margin:0px auto;margin-top:10px;margin-left:60px">
+        <canvas style="margin:0px auto;" id="myChart" width="600" height="300"></canvas>
+        </div>
+</div>
+<div class="ten" >
+    <h5 style="margin-top:30px;text-align: center;ont-size :5px;">Bảng thể hiện kết quả dự đoán</h5>
+</div>
+<table class="table" style="width:80%;border: 2px solid #58257b;margin: 0px auto;margin-top:10px;">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Thời gian</th>
+      <th scope="col">Nhiệt Độ</th>
+      <th scope="col">Độ ẩm</th>
+      <th scope="col">Số người</th>
+      <th scope="col">Khoảng thời gian</th>
+      <th scope="col">Lượng nước</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in data %}
+
+    <tr>
+      <th scope="row">{{ item.thoigian }}</th>
+      <td>{{ item.nhietdo }}</td>
+      <td>{{ item.doam }}</td>
+      <td>{{ item.songuoi }}</td>
+      <td>{{ item.khoangtg }}</td>
+      <td>{{ item.luongnuocdudoan }}</td>
+
+  {% endfor %}
+
+  </tbody>
+</table>
+<div class="ten" >
+    <h5 style="margin-top:50px;text-align: center;ont-size :5px;">kết quả dự đoán 5 ngày tới</h5>
+</div>
+<table class="table" width="500px" style="width:20%;border: 2px solid #58257b;margin: 0px auto;margin-top:10px;">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Thời gian</th>
+      <th scope="col">Lượng nước</th>
+
+    </tr>
+  </thead>
+  <tbody style="height: 250px;">
+  {% for item in data1 %}
+
+    <tr>
+      <th scope="row">{{ item.thoigian }}</th>
+      <td>{{ item.luongnuocdudoan }}</td>
+
+  {% endfor %}
+
+  </tbody>
+</table>
+<DIV style="margin-top:10px;">
+    .
+</DIV>
+</body>
+</html>
+    {% endblock %}
